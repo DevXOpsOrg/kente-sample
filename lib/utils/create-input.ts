@@ -5,7 +5,7 @@ export function createInput(projectName: string, options: CliParams): GeneratorI
     name: projectName,
     title: options.title || '',
     targetDirectory: options.targetDirectory || './',
-    template: 'cfa-template',
+    template: 'mf-template',
     skipInstall: options.skipInstall || false,
     skipRegisterApp: options.skipRegisterApp || false,
     useApiGateway: options.apiGateway || false,

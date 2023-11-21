@@ -1,1 +1,2 @@
-export * from './generate-input';
+export * from './create-input';
+export * from './chalk';
