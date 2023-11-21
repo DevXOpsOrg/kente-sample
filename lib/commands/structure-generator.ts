@@ -7,7 +7,6 @@ export function registerStructureGeneratorCommand(program: Command) {
     .command('create <folderName>')
     .description('Create a folder structure based on user input')
     .action((folderName: string) => {
-      
       const folderPath = path.join(process.cwd(), folderName);
       if (!fs.existsSync(folderPath)) {
         fs.mkdirSync(folderPath);
