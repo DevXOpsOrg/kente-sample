@@ -1,10 +1,19 @@
 {
-  "name": "kente platform",
+  "name": "Kente Platform",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc",
+    "generate": "node ./dist/cli.js create",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --config .eslintrc --cache --fix --ext .",
+    "lint:check": "eslint --config .eslintrc --cache --ext .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,json,js,jsx,html,yml,md}\" \"!**/dist/**\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,json,js,jsx,html,yml,md}\" \"!**/dist/**\"",
+    "prettier-watch": "onchange \"lib/**/*.ts\" \"test/**/*.ts\" -- prettier --write {{changed}}",
+    "clean": "npx rimraf dist feature-app"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +21,31 @@
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^11.1.0",
+    "fs": "^0.0.1-security",
     "mustache": "^4.2.0",
+    "path": "^0.12.7",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/commander": "^2.12.2",
+    "@types/mustache": "^4.2.5",
+    "@types/node": "^20.9.2",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "prettier": "^3.0.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run format"
+    }
   }
 }

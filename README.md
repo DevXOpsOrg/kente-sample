@@ -1,4 +1,3 @@
-
 When developing a Node.js command-line interface (CLI) tool, having a well-organized folder structure can contribute to the maintainability and clarity of your project. Below is a suggested folder structure for a Node.js CLI tool:
 
 ```
@@ -20,8 +19,11 @@ cli/
 |   |-- lib/                   # Test files for core functionality
 |
 |-- .gitignore
+|-- .eslintrc
+|-- .prettierrc
 |-- package.json
 |-- README.md
+|-- tsconfig.json
 ```
 
 Explanation of each folder:
@@ -40,8 +42,12 @@ Explanation of each folder:
 
 **test/:** This folder is for unit tests. It mirrors the structure of the lib/ folder, with subfolders for testing commands and core functionality. Use a testing framework such as Mocha or Jest.
 
-**.gitignore:** This file specifies files and directories that should be ignored by version control. Common entries include node_modules/ and *.log.
+**.gitignore:** This file specifies files and directories that should be ignored by version control. Common entries include node_modules/ and \*.log.
 
 **package.json:** The standard Node.js package configuration file. It includes metadata about your project, dependencies, and scripts.
 
 **README.md:** A documentation file providing information about your CLI tool, its purpose, usage, and any other relevant details.
+
+**tsconfig.json:** The tsconfig.json file specifies the root files and the compiler options required to compile the project.
+
+**.eslintrc:** This .eslintrc file is used for the purpose of improving code quality, making code more consistent, and avoiding bugs
