@@ -1,5 +1,4 @@
 import { Command } from 'commander';
-import { GeneratorInput } from './models/inputs';
 import { createInput } from './utils';
 import {createProject} from "./commands";
 

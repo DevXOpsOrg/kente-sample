@@ -1,10 +1,10 @@
 {
-  "name": "Kente Platform",
+  "name": "create-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node dist/cli.js",
+    "start": "yarn run build && node dist/cli.js",
     "build": "webpack --mode=production",
     "prepublishOnly": "webpack --mode=production",
     "prepublishOnly:pack": "yarn prepublishOnly && rm -rf ~/.npm/_npx && yarn pack",
@@ -22,7 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^5.3.0",
-    "commander": "^11.1.0",
+    "commander": "^11.0.0",
     "fs": "^0.0.1-security",
     "handlebars": "^4.7.8",
     "path": "^0.12.7",
