@@ -6,4 +6,7 @@ static
 templates
 __tests__
 documentation
+.lighthouseci
+.lighthouseci/
 .eslintcache
+dependencies/

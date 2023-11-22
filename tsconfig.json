@@ -13,11 +13,11 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["lib/**/*"],
-  "exclude": ["node_modules", "**/*spec.ts", "src/templates"]
+  "include": ["lib/**/*", "bin/**/*"],
+  "exclude": ["node_modules", "**/*spec.ts", "templates"]
 }

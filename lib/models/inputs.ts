@@ -7,6 +7,8 @@ export interface CommandInputs {
   skipRegisterApp?: boolean;
   useApiGateway?: boolean;
   useDependabot?: boolean;
+  semanticRelease?: boolean;
+  semanticReleaseBranch?: string;
 }
 
 type Required<T> = {

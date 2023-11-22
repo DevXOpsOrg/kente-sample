@@ -1,14 +1,20 @@
-// import handlebars from "handlebars";
-// import { Dirent, promises } from 'fs';
-//
-// const { writeFile, mkdir } = promises;
-//
-// export async function renderTemplate(content: string): Promise<Handlebars.TemplateDelegate<any>> {
-//     return handlebars.compile(content);
-// }
-//
-// async function writeTemplateFile(fileName: string, fileContent: string): Promise<void> {
-//     await mkdir(fileName.substring(0, fileName.lastIndexOf('/')), {
-//         recursive: true,
-//     }).then(() => writeFile(fileName, fileContent));
-// }
+import handlebars from 'handlebars';
+import { GeneratorConfig } from '../models';
+import { readTemplateFile, writeTemplateFile } from '../utils/template-files';
+
+export async function buildTemplate(templateFile: string, data: GeneratorConfig): Promise<void> {
+  let templateFileContent = await readTemplateFile(templateFile);
+
+  if (templateFile.includes('.handlebars')) {
+    templateFileContent = await renderTemplate(templateFileContent, data);
+  }
+
+  const finalFileName = templateFile.replace('template-files/', '').replace('.handlebars', '');
+
+  await writeTemplateFile(finalFileName, templateFileContent);
+}
+
+export async function renderTemplate(content: string, data: GeneratorConfig) {
+  const compiled = handlebars.compile(content);
+  return compiled(data);
+}

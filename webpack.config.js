@@ -12,6 +12,9 @@ module.exports = {
   devtool: 'cheap-source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
+    alias: {
+      handlebars: 'handlebars/lib/index.js',
+    },
   },
   output: {
     libraryTarget: 'commonjs',
