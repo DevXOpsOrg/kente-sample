@@ -2,7 +2,7 @@ import path from 'path';
 import { GeneratorInput } from '../models';
 import { copy } from 'fs-extra';
 import { promises, readdirSync } from 'fs';
-const packageJson = require('../package.json.handlebars');
+// const packageJson = require('../package.json.handlebars');
 
 const { writeFile, mkdir, readFile } = promises;
 

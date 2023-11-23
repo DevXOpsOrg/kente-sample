@@ -15,7 +15,7 @@
     "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,json,js,jsx,html,yml,md}\" \"!**/dist/**\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,json,js,jsx,html,yml,md}\" \"!**/dist/**\"",
     "prettier-watch": "onchange \"lib/**/*.ts\" \"test/**/*.ts\" -- prettier --write {{changed}}",
-    "clean": "npx rimraf dist feature-app"
+    "clean": "npx rimraf dist test-app"
   },
   "keywords": [],
   "author": "",
@@ -45,6 +45,7 @@
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.2",
     "husky": "^8.0.3",
     "prettier": "^3.0.3",
     "ts-loader": "^9.5.1",
