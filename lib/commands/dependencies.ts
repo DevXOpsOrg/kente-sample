@@ -71,8 +71,6 @@ function compareAndUpdatePackageJsonVersions(
   }
 }
 
-// export function installDependencies(
-//     appDirectory: string,
-// ): Promise<string> {
-//     return promisify(exec)(`cd ${appDirectory} && npm install --ignore-scripts`);
-// }
+export function installDependencies(appDirectory: string) {
+  return promisify(exec)(`cd ${appDirectory} && npm install --ignore-scripts`);
+}
