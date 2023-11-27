@@ -13,7 +13,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     alias: {
-      handlebars: 'handlebars/lib/index.js',
+      handlebars: 'handlebars/dist/handlebars.js',
     },
   },
   output: {
@@ -58,6 +58,7 @@ module.exports = {
     rules: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
       { test: /\.tsx?$/, loader: 'ts-loader' },
+      { test: /\.handlebars$/, loader: 'handlebars-loader' },
     ],
   },
   optimization: {

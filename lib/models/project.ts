@@ -1,16 +1,16 @@
 export interface Project {
-  author: string;
-  releaseTrain: string;
+  // author: string;
+  // releaseTrain: string;
   name: string;
-  title: string;
-  gitHubOrganization: string;
-  nameCamelCase: string;
-  version: string;
-  features: Features;
-  template: string;
-  appId?: string;
-  devBranchName: string;
-  awsDomain: string;
+  // title: string;
+  // gitHubOrganization: string;
+  // nameCamelCase: string;
+  // version: string;
+  // features: Features;
+  // template: string;
+  // appId?: string;
+  // devBranchName: string;
+  // awsDomain: string;
 }
 
 export interface Features {

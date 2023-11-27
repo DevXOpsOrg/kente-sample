@@ -1,8 +1,11 @@
 import path from 'path';
-import { GeneratorInput } from '../models';
+import { GeneratorInput, GeneratorConfig } from '../models';
+import { buildTemplate } from '../commands/template-handler';
+import { cleanupProjectDir } from './directories';
 import { copy } from 'fs-extra';
 import { promises, readdirSync } from 'fs';
-// const packageJson = require('../package.json.handlebars');
+import { shouldCopyFile } from './files';
+import packageJson from '../../package.json';
 
 const { writeFile, mkdir, readFile } = promises;
 
@@ -30,6 +33,7 @@ export async function writeTemplateFile(fileName: string, fileContent: string): 
 }
 
 export async function getTemplateRecursively(directory: string): Promise<string[]> {
+  console.log('getTemplateRecursively directory: ', directory);
   const dir = readdirSync(directory, { withFileTypes: true });
   const files = await Promise.all(
     dir.map((dirent) => {
@@ -37,10 +41,15 @@ export async function getTemplateRecursively(directory: string): Promise<string[
       return dirent.isDirectory() ? getTemplateRecursively(res) : res;
     })
   );
-  return Array.prototype.concat(...files).filter((file) => file.match('templates'));
+  console.log('getTemplateRecursively files: ', files);
+  return Array.prototype.concat(...files).filter((file) => {
+    console.log('file: ', file);
+    file.match('templates');
+  });
 }
 
 export async function getTemplateFiles(appTargetDirectory: string): Promise<string[]> {
+  console.log('getTemplateFiles appTargetDirectory: ', appTargetDirectory);
   const files = await getTemplateRecursively(appTargetDirectory);
   files.map((file: string) => file.replace(appTargetDirectory, ''));
   return files;
@@ -50,71 +59,33 @@ export async function readTemplateFile(templateFile: string): Promise<string> {
   return readFile(templateFile, 'utf-8');
 }
 
-// export async function processTemplates(
-//     appTargetDirectory: string,
-//     {
-//         name,
-//         title,
-//         gitHubOrganization,
-//         author,
-//         releaseTrain,
-//         semanticRelease,
-//         semanticReleaseBranch,
-//         useRocketChatIntegration,
-//         template,
-//         packageManager,
-//         devBranchName,
-//         testingLibrary,
-//         useOneGraph,
-//         useOneSightTracking,
-//         useApiGateway,
-//         useLegacyTracking,
-//         useDependabot,
-//         awsDomain,
-//     }: Create
-// ) {
-//     const appName = safeAppName(name);
-//
-//     const data: GeneratorConfig = {
-//         project: {
-//             author,
-//             title,
-//             releaseTrain,
-//             name: appName,
-//             gitHubOrganization,
-//             nameCamelCase: toCamelCase(appName),
-//             version: '0.1.0',
-//             features: {
-//                 semanticRelease,
-//                 semanticReleaseBranch,
-//                 useApiGateway,
-//                 useEnzyme: testingLibrary === TestingLibrary.ENZYME,
-//                 useRocketChatIntegration,
-//                 useOneGraph,
-//                 useOneSightTracking,
-//                 useNpm: packageManager === PackageManager.NPM,
-//                 useLegacyTracking,
-//                 useDependabot,
-//             },
-//             template,
-//             packageManager,
-//             devBranchName,
-//             awsDomain,
-//         },
-//         runtime: {
-//             cli: packageJson.version,
-//             node: process.version,
-//             path: name,
-//         },
-//     };
-//
-//     const templateFiles = await getTemplateFiles(appTargetDirectory);
-//
-//     for (const templateFile of templateFiles) {
-//         if (shouldCopyFile(templateFile, data.project.features, CONDITIONAL_INCLUDES)) {
-//             await buildTemplate(templateFile, data);
-//         }
-//     }
-//
-//     await cleanupProjectDir(templateFiles);
-// }
+export function safeAppName(name: string) {
+  // Replaces '../../../foo/bar-foo' to 'bar-foo'
+  return name.replace(/\S*\//, '');
+}
+
+export async function processTemplates(appTargetDirectory: string, input: GeneratorInput) {
+  const { name } = input;
+  const appName = safeAppName(name);
+
+  const data: GeneratorConfig = {
+    project: {
+      name: appName,
+    },
+    runtime: {
+      cli: packageJson.version,
+      node: process.version,
+      path: name,
+    },
+  };
+
+  const templateFiles = await getTemplateFiles(appTargetDirectory);
+  console.log('templateFiles: ', templateFiles);
+  for (const templateFile of templateFiles) {
+    // if (shouldCopyFile(templateFile, data.project.features, CONDITIONAL_INCLUDES)) {
+    await buildTemplate(templateFile, data);
+    // }
+  }
+
+  await cleanupProjectDir(templateFiles);
+}
