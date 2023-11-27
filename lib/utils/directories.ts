@@ -1,4 +1,4 @@
-import path from 'path';
+import {join} from 'path';
 import { mkdirSync, promises } from 'fs';
 const { rm, access } = promises;
 
@@ -9,7 +9,7 @@ export async function cleanupProjectDir(templateFiles: string[]): Promise<void> 
 
   await Promise.all(
     [...new Set(templateDirs)].map((directory) =>
-      rm(path.join(directory), {
+      rm(join(directory), {
         recursive: true,
       })
     )
@@ -26,7 +26,7 @@ export async function testProjectDirExists(projectName: string): Promise<boolean
 }
 
 export function getFullAppDirectory(targetDir: string, projectName: string) {
-  return path.join(targetDir, projectName);
+  return join(targetDir, projectName);
 }
 
 export function createProjectDir(appDirectory: string) {

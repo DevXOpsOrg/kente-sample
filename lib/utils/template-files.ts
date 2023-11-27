@@ -89,3 +89,4 @@ export async function processTemplates(appTargetDirectory: string, input: Genera
 
   await cleanupProjectDir(templateFiles);
 }
+
