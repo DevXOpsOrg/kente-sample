@@ -1,6 +1,6 @@
-import handlebars from 'handlebars';
+import {compile} from 'handlebars';
 import { GeneratorConfig } from '../models';
-import { readTemplateFile, writeTemplateFile } from '../utils/template-files';
+import {readTemplateFile, writeTemplateFile} from "../utils/file-templating";
 
 export async function buildTemplate(templateFile: string, data: GeneratorConfig): Promise<void> {
   let templateFileContent = await readTemplateFile(templateFile);
@@ -15,6 +15,6 @@ export async function buildTemplate(templateFile: string, data: GeneratorConfig)
 }
 
 export async function renderTemplate(content: string, data: GeneratorConfig) {
-  const compiled = handlebars.compile(content);
+  const compiled = compile(content);
   return compiled(data);
 }

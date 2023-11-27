@@ -1,6 +1,6 @@
 import { GeneratorInput } from '../models';
 import { createProjectDir, getFullAppDirectory } from '../utils/directories';
-import { copyTemplateFiles } from '../utils/template-files';
+import {copyTemplateFiles, processTemplates} from "../utils/file-templating";
 
 export async function createProject(input: GeneratorInput) {
   // TODO Rajesh
@@ -14,6 +14,9 @@ export async function createProject(input: GeneratorInput) {
   createProjectDir(appDirectory);
 
   await copyTemplateFiles(appDirectory, input);
+
+
+  await processTemplates(targetDirectory, input);
 
   return;
 }

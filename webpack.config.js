@@ -13,7 +13,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
     alias: {
-      handlebars: 'handlebars/lib/index.js',
+      handlebars: 'handlebars/dist/handlebars.js',
     },
   },
   output: {
