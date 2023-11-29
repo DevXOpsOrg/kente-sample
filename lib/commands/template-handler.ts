@@ -1,6 +1,6 @@
-import {compile} from 'handlebars';
+import { compile } from 'handlebars';
 import { GeneratorConfig } from '../models';
-import {readTemplateFile, writeTemplateFile} from "../utils/file-templating";
+import { readTemplateFile, writeTemplateFile } from '../utils/file-templating';
 
 export async function buildTemplate(templateFile: string, data: GeneratorConfig): Promise<void> {
   let templateFileContent = await readTemplateFile(templateFile);
