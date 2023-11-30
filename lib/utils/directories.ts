@@ -1,4 +1,4 @@
-import {join} from 'path';
+import { join } from 'path';
 import { mkdirSync, promises } from 'fs';
 const { rm, access } = promises;
 
