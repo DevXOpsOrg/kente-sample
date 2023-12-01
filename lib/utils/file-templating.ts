@@ -1,7 +1,7 @@
 import { join, resolve } from 'path';
 import { GeneratorConfig, GeneratorInput } from '../models';
 import { copy } from 'fs-extra';
-import { promises, readdirSync, mkdirSync } from 'fs';
+import { promises, readdirSync, rename } from 'fs';
 import { safeAppName, toCamelCase } from './casing';
 import { shouldCopyFile } from './files';
 import { CONDITIONAL_INCLUDES } from './conditionals';
@@ -26,6 +26,9 @@ export async function copyTemplateFiles(
 }
 
 export async function writeTemplateFile(fileName: string, fileContent: string): Promise<void> {
+  if (process.platform === 'win32') {
+    fileName = fileName.replace(/\\/g, '/');
+  }
   await mkdir(fileName.substring(0, fileName.lastIndexOf('/')), {
     recursive: true,
   }).then(() => writeFile(fileName, fileContent));
@@ -39,7 +42,7 @@ export async function getTemplateRecursively(directory: string): Promise<string[
       return dirent.isDirectory() ? getTemplateRecursively(res) : res;
     })
   );
-  return Array.prototype.concat(...files).filter((file) => file.match('template-files'));
+  return Array.prototype.concat(...files).filter((file) => file.match('templates'));
 }
 
 export async function getTemplateFiles(appTargetDirectory: string): Promise<string[]> {
