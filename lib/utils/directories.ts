@@ -3,16 +3,24 @@ import { mkdirSync, promises } from 'fs';
 const { rm, access } = promises;
 
 export async function cleanupProjectDir(templateFiles: string[]): Promise<void> {
-  const templateDirs = templateFiles.map((file) =>
-    file.replace(/(^.*\/template-files)\/.+$/, '$1')
-  );
+  const uniqueDirs = [...new Set(templateFiles.map((file) => file.replace(/(^.*\/template-files)\/.+$/, '$1')))];
 
   await Promise.all(
-    [...new Set(templateDirs)].map((directory) =>
-      rm(join(directory), {
-        recursive: true,
-      })
-    )
+    uniqueDirs.map(async (directory) => {
+      try {
+        const stats = await promises.stat(directory);
+
+        if (stats.isDirectory()) {
+          const handlebarFileExists = templateFiles.some((file) => file.startsWith(directory) && file.endsWith('.handlebars'));
+
+          if (!handlebarFileExists) {
+            await promises.rmdir(directory, { recursive: true });;
+          }
+        }
+      } catch (error) {
+        throw error;
+      }
+    })
   );
 }
 
@@ -32,3 +40,4 @@ export function getFullAppDirectory(targetDir: string, projectName: string) {
 export function createProjectDir(appDirectory: string) {
   mkdirSync(appDirectory, { recursive: true });
 }
+

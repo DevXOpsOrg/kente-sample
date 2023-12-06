@@ -8,5 +8,5 @@ export function toCamelCase(string: string): string {
  */
 export function safeAppName(name: string) {
   // Replaces '../../../foo/bar-foo' to 'bar-foo'
-  return name.replace(/\S*\//, '');
+  return name?.replace(/\S*\//, '');
 }

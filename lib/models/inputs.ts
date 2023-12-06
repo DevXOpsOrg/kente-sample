@@ -1,4 +1,4 @@
-export interface CommandInputs {
+export interface CliParams {
   name?: string;
   title?: string;
   targetDirectory?: string;
@@ -15,4 +15,4 @@ type Required<T> = {
   [P in keyof T]-?: T[P];
 };
 
-export type GeneratorInput = Required<CommandInputs>;
+export type GeneratorInput = Required<CliParams>;

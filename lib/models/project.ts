@@ -11,6 +11,6 @@ export interface Project {
 export interface Features {
   semanticRelease: boolean;
   semanticReleaseBranch?: string;
-  useDependabot: boolean;
+  dependabot: boolean;
   registeredInAppStore?: boolean;
 }

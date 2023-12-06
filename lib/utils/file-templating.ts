@@ -6,6 +6,7 @@ import { safeAppName, toCamelCase } from './casing';
 import { shouldCopyFile } from './files';
 import { CONDITIONAL_INCLUDES } from './conditionals';
 import { buildTemplate } from '../commands/template-handler';
+import { cleanupProjectDir} from "../utils/directories";
 const packageJson = require('../../package.json');
 
 const { writeFile, mkdir, readFile } = promises;
@@ -55,8 +56,9 @@ export async function readTemplateFile(templateFile: string): Promise<string> {
   return readFile(templateFile, 'utf-8');
 }
 
-export async function processTemplates(appTargetDirectory: string, input: GeneratorInput) {
-  const { name, title, template, semanticReleaseBranch, semanticRelease, useDependabot } = input;
+export async function processTemplates(input: GeneratorInput) {
+  const { name, title, template, semanticReleaseBranch, semanticRelease, dependabot } = input;
+  const appTargetDirectory = `./templates/${template}`
   const appName = safeAppName(name);
 
   const data: GeneratorConfig = {
@@ -68,7 +70,7 @@ export async function processTemplates(appTargetDirectory: string, input: Genera
       features: {
         semanticRelease,
         semanticReleaseBranch,
-        useDependabot,
+        dependabot,
       },
       template,
     },
@@ -87,5 +89,5 @@ export async function processTemplates(appTargetDirectory: string, input: Genera
     }
   }
 
-  // await cleanupProjectDir(templateFiles);
+  await cleanupProjectDir(templateFiles);
 }

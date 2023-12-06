@@ -1,4 +1,5 @@
 export interface CliParams {
+  name?: string,
   author?: string;
   title?: string;
   semanticRelease?: boolean;
@@ -10,5 +11,14 @@ export interface CliParams {
   apiGateway?: boolean;
   dependabot?: boolean;
   dryRun?: boolean;
+  template?: string;
   targetDirectory?: string;
+  microfrontend?: boolean,
+  microservices?: boolean,
 }
+
+type Required<T> = {
+  [P in keyof T]-?: T[P];
+};
+
+export type GeneratorInput = Required<CliParams>;

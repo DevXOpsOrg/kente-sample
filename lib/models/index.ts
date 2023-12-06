@@ -1,4 +1,3 @@
-export * from './inputs';
 export * from './cli-param';
 export * from './package-json';
 export * from './project';
