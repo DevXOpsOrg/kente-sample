@@ -6,7 +6,7 @@ export const shouldCopyFile = (
   features: Features,
   conditionalIncludes: Map<RegExp, (features: Features) => boolean>
 ): boolean => {
-  let matched: ((features: Features) => boolean)[] = [];
+  const matched: ((features: Features) => boolean)[] = [];
 
   conditionalIncludes.forEach((value, key) => {
     if (templatePath.match(key)) {

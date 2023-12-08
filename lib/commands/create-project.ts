@@ -5,6 +5,7 @@ import { copyTemplateFiles, processTemplates } from '../utils/file-templating';
 export async function createProject(input: GeneratorInput) {
   
   const { targetDirectory, name } = input;
+  
   const appDirectory = getFullAppDirectory(targetDirectory || './', name || 'kente-feature-app');
 
   createProjectDir(appDirectory);

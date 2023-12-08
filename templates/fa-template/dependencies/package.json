@@ -3,36 +3,36 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
-  },
-  "devDependencies": {
-    "@types/chalk": "^2.2.0",
-    "@types/commander": "^2.12.2",
-    "@types/fs-extra": "^11.0.4",
-    "@types/jest": "^27.5.2",
-    "@types/mustache": "^4.2.5",
-    "@types/node": "^16.18.64",
-    "@types/react": "^18.2.38",
-    "@types/react-dom": "^18.2.17",
-    "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "@typescript-eslint/parser": "^6.12.0",
-    "eslint": "^8.54.0",
-    "eslint-plugin-react": "^7.33.2",
-    "prettier": "^3.0.3"
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint:fix": "eslint --config .eslintrc --fix ."
+    "lint": "eslint --config ./.eslintrc.json --cache --ext .",
+    "lint:check": "eslint --config ./.eslintrc.json --cache --ext .",
+    "lint:fix": "eslint --config ./.eslintrc.json --fix --cache --ext .",
+    "format": "prettier --config ./.prettierrc --ignore-path .gitignore --write \"**/*.{ts,tsx,json,js,jsx,html,yml,md}\" \"!**/dist/**\"",
+    "format:check": "prettier --config .prettierrc --check \"**/*.{ts,tsx,json,js,jsx,html,yml,md}\" \"!**/dist/**\"",
+    "prettier-watch": "onchange \"lib/**/*.ts\" \"test/**/*.ts\" -- prettier --write {{changed}}"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -45,5 +45,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.1.0"
   }
 }

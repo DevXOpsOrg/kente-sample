@@ -2,8 +2,8 @@
   "parser": "@typescript-eslint/parser",
   "extends": [
     "eslint:recommended",
-    "plugin:prettier/recommended",
-    "prettier"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
   ],
   "plugins": ["prettier", "@typescript-eslint"],
   "env": {
@@ -14,7 +14,7 @@
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-use-before-define": "off",
-    "@typescript-eslint/no-explicit-any": ["error"],
+    "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": ["error"]
   }
 }

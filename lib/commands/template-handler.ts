@@ -17,7 +17,9 @@ export async function buildTemplate(templateFile: string, data: GeneratorConfig)
   if (process.platform === 'win32') {
     templateFile = templateFile.replace(/\\/g, '/');
   }
-  const finalFileName = templateFile.replace(`templates/${data.project.template}/template-files/`, `${data.project.name}/`).replace('.handlebars', '');
+  const finalFileName = templateFile
+    .replace(`templates/${data.project.template}/template-files/`, `${data.project.name}/`)
+    .replace('.handlebars', '');
 
   await writeTemplateFile(finalFileName, templateFileContent);
 }
