@@ -1,0 +1,18 @@
+{
+  "_pleaseNote": "Please do not touch this file. It will allow you to update your template in the future.",
+  "project": {
+    "features": {
+      "registeredInAppStore": false,
+      "semanticRelease": false,
+      "useDependabot": 
+    },
+    "template": "fa-template",
+    "packageManager": "",
+    "devBranchName": "",
+    "gitHubOrganization": ""
+  },
+  "runtime": {
+    "node": "v21.2.0"
+  },
+  "version": "1.0.0"
+}
